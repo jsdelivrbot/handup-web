@@ -1,7 +1,9 @@
 import { combineReducers } from 'redux';
 
+import roomName from './room_name';
+
 const rootReducer = combineReducers({
-  state: (state = {}) => state
+  roomName
 });
 
 export default rootReducer;
