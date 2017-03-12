@@ -30,8 +30,6 @@ const RoomByName = gql`
   }
 `
 
-const options = ({ match: { params: { name } } }) => ({
-  variables: { name }
-});
+const options = ({ match: { params: { name } } }) => ({ variables: { name } });
 
 export default graphql(RoomByName, { options })(ShowRoom);
