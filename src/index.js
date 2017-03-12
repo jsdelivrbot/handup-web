@@ -15,5 +15,5 @@ ReactDOM.render(
     <Router>
       <Routes />
     </Router>
-  </Provider>
+  </ApolloProvider>
   , document.querySelector('.container'));
