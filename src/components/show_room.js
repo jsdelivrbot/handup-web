@@ -23,6 +23,13 @@ const RoomByName = gql`
           node {
             id
             name
+            lineSpots {
+              edges {
+                node {
+                  position
+                }
+              }
+            }
           }
         }
       }
