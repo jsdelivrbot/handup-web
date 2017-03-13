@@ -61,7 +61,9 @@ class GoogleLogin extends Component {
     // Force instant local storage set
     localStorage.setItem('reduxPersist:userToken', `"${response.data.loginUserWithAuth0Social.token}"`);
     this.props.SetUserToken(response.data.loginUserWithAuth0Social.token)
-    this.updateUser(_.merge(userData, { id: response.data.loginUserWithAuth0Social.user.id }));
+
+    const updateInput = _.merge(userData, { id: response.data.loginUserWithAuth0Social.user.id });
+    this.updateUser(updateInput);
   }
 
   updateUser(input) {
