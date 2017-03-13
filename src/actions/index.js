@@ -1,5 +1,6 @@
 export const CHANGE_ROOM_NAME = 'CHANGE_ROOM_NAME';
 export const SET_USER_TOKEN = 'SET_USER_TOKEN';
+export const SET_RETURN_TO = 'SET_RETURN_TO';
 
 export function ChangeRoomName(name) {
   return { type: CHANGE_ROOM_NAME, payload: name }
@@ -7,4 +8,8 @@ export function ChangeRoomName(name) {
 
 export function SetUserToken(token) {
   return { type: SET_USER_TOKEN, payload: token }
+}
+
+export function SetReturnTo(location) {
+  return { type: SET_RETURN_TO, payload: location }
 }

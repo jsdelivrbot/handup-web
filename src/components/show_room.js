@@ -1,5 +1,8 @@
 import React from 'react';
 import { gql, graphql } from 'react-apollo';
+import { Link } from 'react-router';
+
+import LoginButton from './login_button';
 
 function ShowRoom(props) {
   if (props.data.loading) {
@@ -11,6 +14,8 @@ function ShowRoom(props) {
   return (
     <div>
       Room: {room.name}
+
+      <LoginButton />
     </div>
   );
 }

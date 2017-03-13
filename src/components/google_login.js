@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { gql, graphql } from 'react-apollo';
 import ReactGoogleLogin from 'react-google-login';
 import { googleClientId } from '../config';
@@ -84,6 +85,9 @@ class GoogleLogin extends Component {
       .updateUserMutation({
         variables: { input }
       })
+      .then(() => {
+        this.props.history.push(this.props.returnTo || '/');
+      })
   }
 
   onFailure(response) {
@@ -91,4 +95,8 @@ class GoogleLogin extends Component {
   }
 }
 
-export default connect(null, { SetUserToken })(GoogleLogin);
+function mapStateToProps({ returnTo }) {
+  return { returnTo };
+};
+
+export default connect(mapStateToProps, { SetUserToken })(withRouter(GoogleLogin));
