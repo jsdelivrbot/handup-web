@@ -1,9 +1,11 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { gql, graphql } from 'react-apollo';
 import ReactGoogleLogin from 'react-google-login';
 import { googleClientId } from '../config';
+import { SetUserToken } from '../actions';
 
-function GoogleLogin({ mutate }) {
+function GoogleLogin({ mutate, SetUserToken }) {
   return (
     <ReactGoogleLogin
       clientId={googleClientId}
@@ -23,7 +25,7 @@ function GoogleLogin({ mutate }) {
       }
     })
     .then((response) => {
-      localStorage.setItem('token', response.data.loginUserWithAuth0Social.token);
+      SetUserToken(response.data.loginUserWithAuth0Social.token);
     });
   }
 
@@ -44,4 +46,6 @@ const login = gql`
   }
 `;
 
-export default graphql(login)(GoogleLogin);
+const GoogleLoginWithData = graphql(login)(GoogleLogin);
+
+export default connect(null, { SetUserToken })(GoogleLoginWithData);

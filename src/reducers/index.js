@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux';
 
 import roomName from './room_name';
+import userToken from './user_token';
 
 const rootReducer = combineReducers({
-  roomName
+  roomName,
+  userToken
 });
 
 export default rootReducer;
