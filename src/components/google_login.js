@@ -27,7 +27,17 @@ import { SetUserToken } from '../actions';
   }
 `, { name: 'updateUserMutation' })
 class GoogleLogin extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { loading: false };
+  }
+
   render () {
+    if (this.state.loading) {
+      return <div>Loading ...</div>
+    }
+
     return (
       <ReactGoogleLogin
         clientId={googleClientId}
@@ -39,6 +49,8 @@ class GoogleLogin extends Component {
   }
 
   onSuccess(response) {
+    this.setState({ loading: true });
+
     const userData = {
       name: response.profileObj.name,
       avatarImageUrl: response.profileObj.imageUrl
