@@ -1,6 +1,7 @@
+import _ from 'lodash';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { persistStore, autoRehydrate } from 'redux-persist'
 import { ApolloProvider } from 'react-apollo';
@@ -9,7 +10,16 @@ import client from './apollo';
 import reducers from './reducers';
 import App from './components/app';
 
-const store = createStore(reducers, undefined, compose(autoRehydrate()));
+const combinedReducers = combineReducers(_.merge(reducers, { apollo: client.reducer() }));
+
+const store = createStore(
+  combinedReducers,
+  {},
+  compose(
+    applyMiddleware(client.middleware()),
+    autoRehydrate()
+  )
+);
 
 persistStore(store, { whitelist: ['userToken'] });
 
