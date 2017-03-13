@@ -6,7 +6,7 @@ import { ChangeRoomName } from '../actions';
 function NewRoom({ roomName, history, ChangeRoomName }) {
   return (
     <div>
-      <h1>Enter room</h1>
+      <h2>Enter room</h2>
       <form onSubmit={onSubmit}>
         <input type="text" value={roomName} onChange={onRoomNameChange} />
         <button type="submit">Enter</button>
