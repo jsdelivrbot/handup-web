@@ -1,41 +1,13 @@
-import React from 'react';
+import _ from 'lodash';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { gql, graphql } from 'react-apollo';
 import ReactGoogleLogin from 'react-google-login';
 import { googleClientId } from '../config';
 import { SetUserToken } from '../actions';
 
-function GoogleLogin({ mutate, SetUserToken }) {
-  return (
-    <ReactGoogleLogin
-      clientId={googleClientId}
-      buttonText="Login"
-      onSuccess={onSuccess}
-      onFailure={onFailure}
-    />
-  )
-
-  function onSuccess(response) {
-    mutate({
-      variables: {
-        input: {
-          access_token: response.tokenObj.access_token,
-          connection: 'google_oauth2'
-        }
-      }
-    })
-    .then((response) => {
-      SetUserToken(response.data.loginUserWithAuth0Social.token);
-    });
-  }
-
-  function onFailure(response) {
-    console.log(response);
-  }
-}
-
-const login = gql`
-  mutation Login($input: LoginUserWithAuth0SocialInput!) {
+@graphql(gql`
+  mutation login($input: LoginUserWithAuth0SocialInput!) {
     loginUserWithAuth0Social(input: $input) {
       token
       user {
@@ -44,8 +16,65 @@ const login = gql`
       }
     }
   }
-`;
+`, { name: 'loginMutation' })
+@graphql(gql`
+  mutation updateUser($input: UpdateUserInput!) {
+    updateUser(input: $input) {
+      changedUser {
+        id
+      }
+    }
+  }
+`, { name: 'updateUserMutation' })
+class GoogleLogin extends Component {
+  render () {
+    return (
+      <ReactGoogleLogin
+        clientId={googleClientId}
+        buttonText="Login"
+        onSuccess={this.onSuccess.bind(this)}
+        onFailure={this.onFailure.bind(this)}
+      />
+    )
+  }
 
-const GoogleLoginWithData = graphql(login)(GoogleLogin);
+  onSuccess(response) {
+    const userData = {
+      name: response.profileObj.name,
+      avatarImageUrl: response.profileObj.imageUrl
+    }
 
-export default connect(null, { SetUserToken })(GoogleLoginWithData);
+    this
+      .props
+      .loginMutation({
+        variables: {
+          input: {
+            access_token: response.tokenObj.access_token,
+            connection: 'google_oauth2'
+          }
+        }
+      })
+      .then((response) => this.handleLoginResponse(response, userData));
+  }
+
+  handleLoginResponse(response, userData) {
+    // Force instant local storage set
+    localStorage.setItem('reduxPersist:userToken', `"${response.data.loginUserWithAuth0Social.token}"`);
+    this.props.SetUserToken(response.data.loginUserWithAuth0Social.token)
+    this.updateUser(_.merge(userData, { id: response.data.loginUserWithAuth0Social.user.id }));
+  }
+
+  updateUser(input) {
+    this
+      .props
+      .updateUserMutation({
+        variables: { input }
+      })
+  }
+
+  onFailure(response) {
+    console.log(response);
+  }
+}
+
+export default connect(null, { SetUserToken })(GoogleLogin);

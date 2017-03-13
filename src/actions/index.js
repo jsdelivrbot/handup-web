@@ -6,8 +6,5 @@ export function ChangeRoomName(name) {
 }
 
 export function SetUserToken(token) {
-  // Force instant local storage set
-  localStorage.setItem('reduxPersist:userToken', `"${token}"`);
-
   return { type: SET_USER_TOKEN, payload: token }
 }

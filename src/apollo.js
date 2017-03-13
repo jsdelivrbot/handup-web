@@ -12,7 +12,8 @@ networkInterface.use([{
     }
     const localTokenValue = localStorage.getItem('reduxPersist:userToken');
     if (localTokenValue) {
-      req.options.headers.Authorization = `Bearer ${localTokenValue}`;
+      const token = localTokenValue.slice(1, localTokenValue.length - 1);
+      req.options.headers.Authorization = `Bearer ${token}`;
     }
     next();
   },
