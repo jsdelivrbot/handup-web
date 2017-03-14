@@ -34,12 +34,12 @@ function ShowRoom({ roomQuery, userQuery }) {
   }
 
   function renderRaiseHandButton() {
-    if (userQuery.loading) {
+    if (roomQuery.loading || userQuery.loading) {
       return <div>Loading ...</div>;
     }
 
     if (user) {
-      return <RaiseHandButton />;
+      return <RaiseHandButton roomId={room.id} userId={user.id} />;
     } else {
       return <LoginButton />;
     }
@@ -57,7 +57,11 @@ const RoomByName = gql`
             lineSpots {
               edges {
                 node {
-                  position
+                  createdAt
+                  user {
+                    name
+                    avatarImageUrl
+                  }
                 }
               }
             }
