@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 import { gql, graphql } from 'react-apollo';
 import ReactGoogleLogin from 'react-google-login';
 import { googleClientId } from '../config';
-import { SetUserToken } from '../actions';
+import { SetUserId, SetUserToken } from '../actions';
 
 @graphql(gql`
   mutation login($input: LoginUserWithAuth0SocialInput!) {
@@ -71,6 +71,8 @@ class GoogleLogin extends Component {
   }
 
   handleLoginResponse(response, userData) {
+    this.props.SetUserId(response.data.loginUserWithAuth0Social.user.id);
+
     // Force instant local storage set
     localStorage.setItem('reduxPersist:userToken', `"${response.data.loginUserWithAuth0Social.token}"`);
     this.props.SetUserToken(response.data.loginUserWithAuth0Social.token)
@@ -99,4 +101,4 @@ function mapStateToProps({ returnTo }) {
   return { returnTo };
 };
 
-export default connect(mapStateToProps, { SetUserToken })(withRouter(GoogleLogin));
+export default connect(mapStateToProps, { SetUserId, SetUserToken })(withRouter(GoogleLogin));
