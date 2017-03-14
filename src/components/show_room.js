@@ -83,7 +83,7 @@ const getUserOptions = ({ userId }) => ({ variables: { id: userId } });
 
 const ShowRoomWithData = compose(
   graphql(RoomByName, { name: 'roomQuery', options: roomByNameOptions }),
-  graphql(GetUser, { name: 'userQuery', options: getUserOptions, skip: (ownProps) => !ownProps.userId })
+  graphql(GetUser, { name: 'userQuery', options: getUserOptions, skip: ({ userId }) => !userId })
 )(ShowRoom);
 
 function mapStateToProps({ userId }) {
