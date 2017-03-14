@@ -12,7 +12,7 @@ function ShowRoom({ roomQuery, userQuery }) {
   }
 
   const room = roomQuery.viewer.allRooms.edges[0].node;
-  const user = !userQuery.loading ? userQuery.getUser : null;
+  const user = (userQuery && !userQuery.loading) ? userQuery.getUser : null;
 
   return (
     <div>
@@ -34,7 +34,7 @@ function ShowRoom({ roomQuery, userQuery }) {
   }
 
   function renderRaiseHandButton() {
-    if (roomQuery.loading || userQuery.loading) {
+    if (roomQuery.loading || (userQuery && userQuery.loading)) {
       return <div>Loading ...</div>;
     }
 
