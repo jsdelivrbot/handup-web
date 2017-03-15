@@ -6,11 +6,11 @@ import MainButton from './main_button';
 export default function Line({ room }) {
   return (
     <div>
+      <MainButton room={room} />
+
       <ul>
         {renderLineSpots()}
       </ul>
-
-      <MainButton room={room} />
     </div>
   );
 
