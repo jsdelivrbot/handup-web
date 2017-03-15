@@ -3,7 +3,7 @@ import { gql, graphql } from 'react-apollo';
 
 function RaiseHandButton({ userId, roomId, createLineSpotMutation }) {
   return (
-    <button onClick={onClick}>Raise hand</button>
+    <button className="btn btn-xl btn-primary full-width" onClick={onClick}>Raise hand</button>
   );
 
   function onClick() {

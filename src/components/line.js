@@ -6,9 +6,11 @@ import MainButton from './main_button';
 export default function Line({ room }) {
   return (
     <div>
-      <MainButton room={room} />
+      <div className="m-b-s">
+        <MainButton room={room} />
+      </div>
 
-      <ul>
+      <ul className="list-group">
         {renderLineSpots()}
       </ul>
     </div>
@@ -17,7 +19,7 @@ export default function Line({ room }) {
   function renderLineSpots() {
     return room.lineSpots.edges.map(function (lineSpot) {
       return (
-        <li key={lineSpot.node.id}>
+        <li className="list-group-item" key={lineSpot.node.id}>
           <LineSpot lineSpot={lineSpot.node} />
         </li>
       );

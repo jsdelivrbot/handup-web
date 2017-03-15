@@ -13,7 +13,7 @@ function ShowRoom({ roomQuery }) {
 
   return (
     <div>
-      <h2>#{room.name}</h2>
+      <h1>#{room.name}</h1>
       <Line room={room} />
     </div>
   );
