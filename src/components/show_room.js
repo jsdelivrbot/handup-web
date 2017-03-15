@@ -54,9 +54,10 @@ const RoomByName = gql`
           node {
             id
             name
-            lineSpots {
+            lineSpots(orderBy: { field: createdAt, direction: ASC }) {
               edges {
                 node {
+                  id
                   createdAt
                   user {
                     id
