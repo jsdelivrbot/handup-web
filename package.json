@@ -12,7 +12,7 @@
     "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js --recursive ./test",
     "test:watch": "npm run test -- --watch",
     "heroku-postbuild": "./node_modules/webpack/bin/webpack.js -p --config ./webpack.config.js --progress",
-    "web": "node server.js"
+    "heroku-start": "node server.js"
   },
   "author": "",
   "license": "ISC",
