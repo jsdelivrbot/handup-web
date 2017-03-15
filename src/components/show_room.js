@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { gql, graphql, compose } from 'react-apollo';
 import { Link } from 'react-router';
 
+import Line from './line';
 import RaiseHandButton from './raise_hand_button';
 import LoginButton from './login_button';
 
@@ -30,7 +31,12 @@ function ShowRoom({ roomQuery, userQuery }) {
       return <div>Loading ...</div>;
     }
 
-    return <h2>#{room.name}</h2>;
+    return (
+      <div>
+        <h2>#{room.name}</h2>
+        <Line room={room} />
+      </div>
+    );
   }
 
   function renderRaiseHandButton() {
