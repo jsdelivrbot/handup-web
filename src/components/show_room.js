@@ -46,8 +46,8 @@ function ShowRoom({ roomQuery, userQuery }) {
   }
 }
 
-const RoomByName = gql`
-  query RoomByName($name: String!) {
+const roomByNameQuery = gql`
+  query roomByName($name: String!) {
     viewer {
       allRooms(where: { name: { eq: $name } }) {
         edges {
@@ -74,8 +74,8 @@ const RoomByName = gql`
   }
 `
 
-const GetUser = gql`
-  query GetUser($id: ID!) {
+const getUserQuery = gql`
+  query getUser($id: ID!) {
     getUser(id: $id) {
       id
       name
@@ -88,8 +88,8 @@ const roomByNameOptions = ({ match: { params: { name } } }) => ({ variables: { n
 const getUserOptions = ({ userId }) => ({ variables: { id: userId } });
 
 const ShowRoomWithData = compose(
-  graphql(RoomByName, { name: 'roomQuery', options: roomByNameOptions }),
-  graphql(GetUser, { name: 'userQuery', options: getUserOptions, skip: ({ userId }) => !userId })
+  graphql(roomByNameQuery, { name: 'roomQuery', options: roomByNameOptions }),
+  graphql(getUserQuery, { name: 'userQuery', options: getUserOptions, skip: ({ userId }) => !userId })
 )(ShowRoom);
 
 function mapStateToProps({ userId }) {
