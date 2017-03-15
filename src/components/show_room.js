@@ -17,18 +17,22 @@ class ShowRoom extends Component {
   }
 
   render() {
+    return (
+      <div>
+        <h1>#{this.props.match.params.name}</h1>
+        {this.renderLine()}
+      </div>
+    );
+  }
+
+  renderLine() {
     if (this.props.roomQuery.loading || this.props.roomQuery.viewer.allRooms.edges.length == 0) {
       return <div>Loading ...</div>;
     }
 
     const room = this.props.roomQuery.viewer.allRooms.edges[0].node;
 
-    return (
-      <div>
-        <h1>#{room.name}</h1>
-        <Line room={room} />
-      </div>
-    );
+    return <Line room={room} />;
   }
 }
 
