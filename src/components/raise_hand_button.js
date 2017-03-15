@@ -12,7 +12,7 @@ function RaiseHandButton({ userId, roomId, createLineSpotMutation }) {
   }
 };
 
-export default graphql(gql`
+const createLineSpotMutation = gql`
   mutation createLineSpot($input: CreateLineSpotInput!) {
     createLineSpot(input: $input){
       changedLineSpot {
@@ -20,4 +20,6 @@ export default graphql(gql`
       }
     }
   }
-`, { name: 'createLineSpotMutation' })(RaiseHandButton);
+`;
+
+export default graphql(createLineSpotMutation, { name: 'createLineSpotMutation' })(RaiseHandButton);
