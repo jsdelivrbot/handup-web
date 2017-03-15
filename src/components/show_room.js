@@ -3,7 +3,6 @@ import { gql, graphql, compose } from 'react-apollo';
 import { Link } from 'react-router';
 
 import Line from './line';
-import MainButton from './main_button';
 
 function ShowRoom({ roomQuery }) {
   if (roomQuery.loading) {
@@ -14,27 +13,10 @@ function ShowRoom({ roomQuery }) {
 
   return (
     <div>
-      <div>
-        {renderRoom()}
-      </div>
-      <div>
-        <MainButton room={room} />
-      </div>
+      <h2>#{room.name}</h2>
+      <Line room={room} />
     </div>
   );
-
-  function renderRoom() {
-    if (roomQuery.loading) {
-      return <div>Loading ...</div>;
-    }
-
-    return (
-      <div>
-        <h2>#{room.name}</h2>
-        <Line room={room} />
-      </div>
-    );
-  }
 }
 
 const roomByNameQuery = gql`
