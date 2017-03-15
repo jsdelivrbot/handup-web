@@ -59,6 +59,7 @@ const RoomByName = gql`
                 node {
                   createdAt
                   user {
+                    id
                     name
                     avatarImageUrl
                   }
