@@ -1,6 +1,9 @@
 {
   "name": "Handup",
   "version": "1.0.0",
+  "engines": {
+    "node": "6.10.0"
+  },
   "description": "Raise.",
   "main": "index.js",
   "repository": "git@github.com:Helabs/handup-web.git",
