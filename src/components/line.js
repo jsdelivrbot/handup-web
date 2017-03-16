@@ -25,11 +25,7 @@ class Line extends Component {
               switch (subscriptionData.data.subscribeToLineSpot.mutation) {
               case 'createLineSpot':
                 const edgesWithCreatedItem = [
-                  {
-                    node: {
-                      ...subscriptionData.data.subscribeToLineSpot.value
-                    }
-                  },
+                  { node: subscriptionData.data.subscribeToLineSpot.value },
                   ...prev.getRoom.lineSpots.edges
                 ];
 
