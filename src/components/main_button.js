@@ -16,7 +16,14 @@ function MainButton({ currentUserId, currentUser, room }) {
       const userLineSpot = _.find(room.lineSpots.edges, { node: { user: { id: currentUser.id } } });
       if (userLineSpot) {
         const isUserTurn = room.lineSpots.edges[0] == userLineSpot;
-        return <LowerHandButton roomId={room.id} userLineSpot={userLineSpot.node} isUserTurn={isUserTurn} />;
+        return (
+          <LowerHandButton
+            roomId={room.id}
+            userLineSpot={userLineSpot.node}
+            isUserTurn={isUserTurn}
+            nextLineSpot={room.lineSpots.edges[1] ? room.lineSpots.edges[1].node : null}
+          />
+        );
       } else {
         return <RaiseHandButton roomId={room.id} />;
       }
