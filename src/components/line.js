@@ -59,11 +59,8 @@ class Line extends Component {
   }
 
   render() {
-    if (this.props.getRoomQuery.loading) {
-      return <div>Loading ...</div>;
-    }
 
-    const currentUser = this.props.getUserQuery ? this.props.getUserQuery.getUser : null;
+    const currentUser = this.props.getUserQuery.getUser ? this.props.getUserQuery.getUser : null;
     const room = this.props.getRoomQuery.getRoom;
 
     return (
@@ -80,6 +77,10 @@ class Line extends Component {
   }
 
   renderLineSpots(room, currentUser) {
+    if (!room) {
+      return;
+    }
+
     return room.lineSpots.edges.map(function (lineSpot, index) {
       return <LineSpot key={lineSpot.node.id} currentUser={currentUser} lineSpot={lineSpot.node} index={index} />;
     });

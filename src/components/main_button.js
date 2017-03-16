@@ -8,7 +8,7 @@ import LoginButton from './login_button';
 
 function MainButton({ currentUserId, currentUser, room }) {
   if (!room) {
-    return <div>Loading ...</div>;
+    return renderLoading();
   }
 
   if (currentUserId) {
@@ -21,10 +21,14 @@ function MainButton({ currentUserId, currentUser, room }) {
         return <RaiseHandButton roomId={room.id} />;
       }
     } else {
-      return <div>Loading ...</div>;
+      return renderLoading();
     }
   } else {
     return <LoginButton />;
+  }
+
+  function renderLoading() {
+    return <button className="btn btn-xl btn-primary full-width">Loading ...</button>
   }
 }
 
