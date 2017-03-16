@@ -32,10 +32,11 @@ class ShowRoom extends Component {
 
     const room = this.props.roomQuery.viewer.allRooms.edges[0].node;
 
-    return <Line room={room} />;
+    return <Line roomId={room.id} />;
   }
 }
 
+const roomByNameQueryOptions = ({ match: { params: { name } } }) => ({ variables: { name } });
 const roomByNameQuery = gql`
   query roomByName($name: String!) {
     viewer {
@@ -43,28 +44,12 @@ const roomByNameQuery = gql`
         edges {
           node {
             id
-            name
-            lineSpots(orderBy: { field: createdAt, direction: ASC }) {
-              edges {
-                node {
-                  id
-                  createdAt
-                  user {
-                    id
-                    name
-                    avatarImageUrl
-                  }
-                }
-              }
-            }
           }
         }
       }
     }
   }
-`
-
-const roomByNameOptions = ({ match: { params: { name } } }) => ({ variables: { name } });
+`;
 
 const createRoomMutation = gql`
   mutation createRoom($input: CreateRoomInput!) {
@@ -74,9 +59,9 @@ const createRoomMutation = gql`
       }
     }
   }
-`
+`;
 
 export default compose(
-  graphql(roomByNameQuery, { name: 'roomQuery', options: roomByNameOptions }),
+  graphql(roomByNameQuery, { name: 'roomQuery', options: roomByNameQueryOptions }),
   graphql(createRoomMutation, { name: 'createRoomMutation' })
 )(ShowRoom);
