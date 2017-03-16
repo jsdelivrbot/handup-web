@@ -14,10 +14,8 @@ function RaiseHandButton({ userId, roomId, createLineSpotMutation, isCreatingLin
 
   function onClick() {
     SetIsCreatingLineSpot(true);
-    const input = { roomId, userId };
-    createLineSpotMutation({ variables: { input }}).then(() => {
-      SetIsCreatingLineSpot(false);
-    });
+    createLineSpotMutation({ variables: { input: { roomId, userId } }})
+      .then(() => SetIsCreatingLineSpot(false));
   }
 };
 
