@@ -1,8 +1,10 @@
+import _ from 'lodash';
 import React from 'react';
 import { connect } from 'react-redux';
 import { gql, graphql, compose } from 'react-apollo';
 
 import RaiseHandButton from './raise_hand_button';
+import LowerHandButton from './lower_hand_button';
 import LoginButton from './login_button';
 
 function MainButton({ room, userQuery }) {
@@ -14,7 +16,12 @@ function MainButton({ room, userQuery }) {
     if (userQuery.loading) {
       return <div>Loading ...</div>;
     } else {
-      return <RaiseHandButton roomId={room.id} userId={userQuery.getUser.id} />;
+      const userLineSpot = _.find(room.lineSpots.edges, { node: { user: { id: userQuery.getUser.id } } });
+      if (userLineSpot) {
+        return <LowerHandButton roomId={room.id} userId={userQuery.getUser.id} userLineSpot={userLineSpot.node} />;
+      } else {
+        return <RaiseHandButton roomId={room.id} userId={userQuery.getUser.id} />;
+      }
     }
   } else {
     return <LoginButton />;
