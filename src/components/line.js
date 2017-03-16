@@ -28,7 +28,7 @@ class Line extends Component {
                   getRoom: {
                     lineSpots: {
                       edges: {
-                        $unshift: [
+                        $push: [
                           { node: subscriptionData.data.subscribeToLineSpot.value }
                         ]
                       }
