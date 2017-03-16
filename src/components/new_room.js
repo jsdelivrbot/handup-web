@@ -6,10 +6,13 @@ import { ChangeRoomName } from '../actions';
 function NewRoom({ roomName, history, ChangeRoomName }) {
   return (
     <div>
-      <h2>Enter room</h2>
+      <h1>What room?</h1>
+
       <form onSubmit={onSubmit}>
-        <input type="text" value={roomName} onChange={onRoomNameChange} />
-        <button type="submit">Enter</button>
+        <div className="form-group">
+          <input type="text" className="form-control" value={roomName} onChange={onRoomNameChange} />
+        </div>
+        <button type="submit" className="btn btn-xl btn-primary">Enter</button>
       </form>
     </div>
   )
