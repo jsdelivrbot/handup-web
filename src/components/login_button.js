@@ -20,7 +20,7 @@ class LoginButton extends Component {
       <ReactGoogleLogin
         className="btn btn-xl btn-primary full-width"
         clientId={googleClientId}
-        buttonText="Login with google to participate!"
+        buttonText="Login with Google to participate!"
         onSuccess={this.onSuccess.bind(this)}
         onFailure={this.onFailure.bind(this)}
         disabled={this.state.loading}
