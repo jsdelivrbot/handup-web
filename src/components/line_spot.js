@@ -34,7 +34,7 @@ export default function LineSpot({ currentUser, lineSpot, index }) {
 
   function renderIndex() {
     if (index == 0) {
-      if (currentUser && lineSpot.user.id == currentUser.id) {
+      if (isCurrentUser()) {
         return <div style={{ fontSize: '16px' }}>It's your turn!</div>;
       } else {
         return <div style={{ fontSize: '16px' }}>Current turn</div>;
