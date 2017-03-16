@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
 import update from 'immutability-helper';
@@ -62,12 +63,13 @@ class Line extends Component {
       return <div>Loading ...</div>;
     }
 
+    const user = this.props.getUserQuery.getUser;
     const room = this.props.getRoomQuery.getRoom;
 
     return (
       <div>
         <div className="m-b-s">
-          <MainButton room={room} />
+          <MainButton room={room} user={user} />
         </div>
 
         <div className="flex flex-column">
@@ -101,11 +103,21 @@ const createLineSpotSubscription = gql`
   }
 `;
 
+const getUserQueryOptions = ({ userId }) => ({ variables: { id: userId } });
+const getUserQuery = gql`
+  query getUser($id: ID!) {
+    getUser(id: $id) {
+      id
+      name
+      avatarImageUrl
+    }
+  }
+`;
+
 const getRoomQueryOptions = ({ roomId }) => ({
   returnPartialData: true,
   variables: { id: roomId }
 });
-
 const getRoomQuery = gql`
   query getRoom($id: ID!) {
     getRoom(id: $id) {
@@ -128,6 +140,13 @@ const getRoomQuery = gql`
   }
 `;
 
-export default compose(
+const LineWithData = compose(
+  graphql(getUserQuery, { name: 'getUserQuery', options: getUserQueryOptions, skip: ({ userId }) => !userId }),
   graphql(getRoomQuery, { name: 'getRoomQuery', options: getRoomQueryOptions })
 )(Line);
+
+function mapStateToProps({ userId }) {
+  return { userId };
+}
+
+export default connect(mapStateToProps)(LineWithData);
