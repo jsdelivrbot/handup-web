@@ -36,6 +36,21 @@ class Line extends Component {
                     }
                   }
                 });
+              case 'updateLineSpot':
+                const indexToReplace =  _.findIndex(
+                  prev.getRoom.lineSpots.edges,
+                  { node: { id: subscriptionData.data.subscribeToLineSpot.value.id } }
+                );
+
+                return update(prev, {
+                  getRoom: {
+                    lineSpots: {
+                      edges: {
+                        $splice: [[indexToRemove, 1, { node: subscriptionData.data.subscribeToLineSpot.value }]]
+                      }
+                    }
+                  }
+                });
               case 'deleteLineSpot':
                 const indexToRemove =  _.findIndex(
                   prev.getRoom.lineSpots.edges,
@@ -88,7 +103,7 @@ class Line extends Component {
 
 const createLineSpotSubscription = gql`
   subscription subscribeToLineSpot($filter: LineSpotSubscriptionFilter) {
-    subscribeToLineSpot(mutations: [createLineSpot, deleteLineSpot], filter: $filter) {
+    subscribeToLineSpot(mutations: [createLineSpot, updateLineSpot, deleteLineSpot], filter: $filter) {
       mutation
       value {
         id
