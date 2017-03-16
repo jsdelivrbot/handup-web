@@ -59,8 +59,7 @@ class Line extends Component {
   }
 
   render() {
-
-    const currentUser = this.props.getUserQuery.getUser ? this.props.getUserQuery.getUser : null;
+    const currentUser = (this.props.getUserQuery && this.props.getUserQuery.getUser) ? this.props.getUserQuery.getUser : null;
     const room = this.props.getRoomQuery.getRoom;
 
     return (

@@ -4,6 +4,7 @@ import gql from 'graphql-tag';
 import { Link } from 'react-router';
 
 import Line from './line';
+import LogoutButton from './logout_button';
 
 class ShowRoom extends Component {
   componentWillReceiveProps(nextProps) {
@@ -20,7 +21,15 @@ class ShowRoom extends Component {
   render() {
     return (
       <div>
-        <h1>#{this.props.match.params.name}</h1>
+        <div className="flex flex-row flex-align-items-center">
+          <div style={{ flex: '1 0' }}>
+            <h1>#{this.props.match.params.name}</h1>
+          </div>
+          <div style={{ flex: '0 0' }}>
+            <LogoutButton />
+          </div>
+        </div>
+
         {this.renderLine()}
       </div>
     );
