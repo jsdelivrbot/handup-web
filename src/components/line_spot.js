@@ -1,11 +1,12 @@
 import React from 'react';
+import classnames from 'classnames';
 
 import TimeAgo from './time_ago';
 import TimeCounter from './time_counter';
 
 export default function LineSpot({ currentUser, lineSpot, index }) {
   return (
-    <div className="flex flex-row flex-align-items-center m-t-s m-b-s">
+    <div className={`flex flex-row flex-align-items-center m-t-s m-b-s ${ isCurrentUser() ? 'bold' : '' }`}>
       <div className="center-text" style={{ flex: '2 0 50px' }}>
         {renderIndex()}
       </div>
@@ -34,12 +35,16 @@ export default function LineSpot({ currentUser, lineSpot, index }) {
   function renderIndex() {
     if (index == 0) {
       if (currentUser && lineSpot.user.id == currentUser.id) {
-        return <div className="bold" style={{ fontSize: '16px' }}>It's your turn!</div>;
+        return <div style={{ fontSize: '16px' }}>It's your turn!</div>;
       } else {
         return <div style={{ fontSize: '16px' }}>Current turn</div>;
       }
     } else {
       return <div style={{ fontSize: '26px' }}>#{index}</div>;
     }
+  }
+
+  function isCurrentUser() {
+    return currentUser && currentUser.id == lineSpot.user.id;
   }
 };
