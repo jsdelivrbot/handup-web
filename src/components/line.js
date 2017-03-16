@@ -108,6 +108,7 @@ const createLineSpotSubscription = gql`
       value {
         id
         createdAt
+        turnStartedAt
         user {
           id
           name
@@ -143,6 +144,7 @@ const getRoomQuery = gql`
           node {
             id
             createdAt
+            turnStartedAt
             user {
               id
               name
