@@ -8,7 +8,7 @@ import { SetIsCreatingLineSpot } from '../actions';
 function RaiseHandButton({ currentUserId, roomId, createLineSpotMutation, isCreatingLineSpot, SetIsCreatingLineSpot }) {
   return (
     <button className="btn btn-xl btn-primary full-width" onClick={onClick} disabled={isCreatingLineSpot}>
-      Raise hand
+      <i className="fa fa-hand-paper-o  m-r-s" /> Raise hand
     </button>
   );
 

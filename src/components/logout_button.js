@@ -8,7 +8,11 @@ function LogoutButton({ currentUserId, SetCurrentUserId, SetCurrentUserToken }) 
     return null;
   }
 
-  return <button className="btn btn-default" onClick={onClick}>Logout</button>;
+  return (
+    <button className="btn btn-default" onClick={onClick}>
+      <i className="fa fa-sign-out" />
+    </button>
+  );
 
   function onClick() {
     SetCurrentUserId(null);

@@ -21,14 +21,16 @@ class ShowRoom extends Component {
   render() {
     return (
       <div>
-        <div className="flex flex-row flex-align-items-center">
-          <div style={{ flex: '1 0' }}>
-            <h1>#{this.props.match.params.name}</h1>
-          </div>
-          <div style={{ flex: '0 0 100px' }}>
+        <div className="flex flex-row flex-align-items-center m-b-xs">
+          <div style={{ flex: '0 0 55px' }}>
             <Link to="/">
-              <button className="btn btn-default text-black">Bo back</button>
+              <button className="btn btn-default text-black">
+                <i className="fa fa-arrow-left" />
+              </button>
             </Link>
+          </div>
+          <div style={{ flex: '1 0' }}>
+            <h1 className="m-b-z">#{this.props.match.params.name}</h1>
           </div>
           <div style={{ flex: '0 0' }}>
             <LogoutButton />

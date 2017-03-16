@@ -10,7 +10,7 @@ function LowerHandButton({ roomId, userLineSpot, isUserTurn, nextLineSpot,
 
   return (
     <button className="btn btn-xl btn-primary full-width" onClick={onClick} disabled={isDeletingLineSpot}>
-      {buttonText()}
+      <i className="fa fa-hand-rock-o m-r-s" /> {buttonText()}
     </button>
   );
 

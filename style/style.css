@@ -26,6 +26,18 @@
   margin-bottom: 10px;
 }
 
+.m-b-xs {
+  margin-bottom: 5px;
+}
+
+.m-b-z {
+  margin-bottom: 0;
+}
+
+.m-r-s {
+  margin-right: 10px;
+}
+
 .m-b-m {
   margin-bottom: 20px;
 }
