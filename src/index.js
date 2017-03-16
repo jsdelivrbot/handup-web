@@ -6,17 +6,17 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { persistStore, autoRehydrate } from 'redux-persist'
 import { ApolloProvider } from 'react-apollo';
 
-import client from './apollo';
+import apolloClient from './apollo/index';
 import reducers from './reducers';
 import App from './components/app';
 
-const combinedReducers = combineReducers(_.merge(reducers, { apollo: client.reducer() }));
+const combinedReducers = combineReducers(_.merge(reducers, { apollo: apolloClient.reducer() }));
 
 const store = createStore(
   combinedReducers,
   {},
   compose(
-    applyMiddleware(client.middleware()),
+    applyMiddleware(apolloClient.middleware()),
     autoRehydrate()
   )
 );
@@ -24,9 +24,10 @@ const store = createStore(
 persistStore(store, { whitelist: ['userId', 'userToken'] });
 
 ReactDOM.render(
-  <ApolloProvider store={store} client={client}>
+  <ApolloProvider store={store} client={apolloClient}>
     <Router>
       <Route path="/" component={App} />
     </Router>
   </ApolloProvider>
-  , document.querySelector('#root'));
+  , document.querySelector('#root')
+);
