@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { persistStore, autoRehydrate } from 'redux-persist'
 import { ApolloProvider } from 'react-apollo';
 
-import apolloClient from './apollo/index';
+import apolloClient from './apollo/client';
 import reducers from './reducers';
 import App from './components/app';
 
