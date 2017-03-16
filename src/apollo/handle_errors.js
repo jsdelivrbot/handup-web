@@ -12,8 +12,8 @@ export default {
           console.error('GraphQL Errors: ', errors);
 
           if (_.some(errors, { status: 403 })) {
-            localStorage.removeItem('reduxPersist:userToken');
-            localStorage.removeItem('reduxPersist:userId');
+            localStorage.removeItem('reduxPersist:currentUserToken');
+            localStorage.removeItem('reduxPersist:currentUserId');
             window.location.reload();
           }
         }

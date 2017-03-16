@@ -5,7 +5,7 @@ import gql from 'graphql-tag';
 
 import { SetIsCreatingLineSpot } from '../actions';
 
-function RaiseHandButton({ userId, roomId, createLineSpotMutation, isCreatingLineSpot, SetIsCreatingLineSpot }) {
+function RaiseHandButton({ currentUserId, roomId, createLineSpotMutation, isCreatingLineSpot, SetIsCreatingLineSpot }) {
   return (
     <button className="btn btn-xl btn-primary full-width" onClick={onClick} disabled={isCreatingLineSpot}>
       Raise hand
@@ -14,7 +14,8 @@ function RaiseHandButton({ userId, roomId, createLineSpotMutation, isCreatingLin
 
   function onClick() {
     SetIsCreatingLineSpot(true);
-    createLineSpotMutation({ variables: { input: { roomId, userId } }})
+    const input = { userId: currentUserId, roomId };
+    createLineSpotMutation({ variables: { input }})
       .then(() => SetIsCreatingLineSpot(false));
   }
 };
@@ -31,8 +32,8 @@ const createLineSpotMutation = gql`
 
 const RaiseHandButtonWithData = graphql(createLineSpotMutation, { name: 'createLineSpotMutation' })(RaiseHandButton);
 
-function mapStateToProps({ isCreatingLineSpot }) {
-  return { isCreatingLineSpot };
+function mapStateToProps({ currentUserId, isCreatingLineSpot }) {
+  return { currentUserId, isCreatingLineSpot };
 }
 
 export default connect(mapStateToProps, { SetIsCreatingLineSpot })(RaiseHandButtonWithData)

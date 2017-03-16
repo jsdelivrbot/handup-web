@@ -21,7 +21,7 @@ const store = createStore(
   )
 );
 
-persistStore(store, { whitelist: ['userId', 'userToken'] });
+persistStore(store, { whitelist: ['currentUserId', 'currentUserToken'] });
 
 ReactDOM.render(
   <ApolloProvider store={store} client={apolloClient}>

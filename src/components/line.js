@@ -63,17 +63,17 @@ class Line extends Component {
       return <div>Loading ...</div>;
     }
 
-    const user = this.props.getUserQuery ? this.props.getUserQuery.getUser : null;
+    const currentUser = this.props.getUserQuery ? this.props.getUserQuery.getUser : null;
     const room = this.props.getRoomQuery.getRoom;
 
     return (
       <div>
         <div className="m-b-s">
-          <MainButton room={room} user={user} />
+          <MainButton room={room} currentUser={currentUser} />
         </div>
 
         <div className="flex flex-column">
-          {this.renderLineSpots(room, user)}
+          {this.renderLineSpots(room, currentUser)}
         </div>
       </div>
     );
@@ -103,7 +103,7 @@ const createLineSpotSubscription = gql`
   }
 `;
 
-const getUserQueryOptions = ({ userId }) => ({ variables: { id: userId } });
+const getUserQueryOptions = ({ currentUserId }) => ({ variables: { id: currentUserId } });
 const getUserQuery = gql`
   query getUser($id: ID!) {
     getUser(id: $id) {
@@ -141,12 +141,12 @@ const getRoomQuery = gql`
 `;
 
 const LineWithData = compose(
-  graphql(getUserQuery, { name: 'getUserQuery', options: getUserQueryOptions, skip: ({ userId }) => !userId }),
+  graphql(getUserQuery, { name: 'getUserQuery', options: getUserQueryOptions, skip: ({ currentUserId }) => !currentUserId }),
   graphql(getRoomQuery, { name: 'getRoomQuery', options: getRoomQueryOptions })
 )(Line);
 
-function mapStateToProps({ userId }) {
-  return { userId };
+function mapStateToProps({ currentUserId }) {
+  return { currentUserId };
 }
 
 export default connect(mapStateToProps)(LineWithData);

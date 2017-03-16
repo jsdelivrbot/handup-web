@@ -5,7 +5,7 @@ import gql from 'graphql-tag';
 
 import { SetIsDeletingLineSpot } from '../actions';
 
-function LowerHandButton({ roomId, userId, userLineSpot, isUserTurn, deleteLineSpotMutation, isDeletingLineSpot, SetIsDeletingLineSpot }) {
+function LowerHandButton({ roomId, userLineSpot, isUserTurn, deleteLineSpotMutation, isDeletingLineSpot, SetIsDeletingLineSpot }) {
   return (
     <button className="btn btn-xl btn-primary full-width" onClick={onClick} disabled={isDeletingLineSpot}>
       {buttonText()}

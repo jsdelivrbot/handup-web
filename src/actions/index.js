@@ -1,20 +1,20 @@
+export const SET_CURRENT_USER_ID = 'SET_CURRENT_USER_ID';
+export const SET_CURRENT_USER_TOKEN = 'SET_CURRENT_USER_TOKEN';
 export const CHANGE_ROOM_NAME = 'CHANGE_ROOM_NAME';
-export const SET_USER_ID = 'SET_USER_ID';
-export const SET_USER_TOKEN = 'SET_USER_TOKEN';
 export const SET_RETURN_TO = 'SET_RETURN_TO';
 export const SET_IS_CREATING_LINE_SPOT = 'SET_IS_CREATING_LINE_SPOT';
 export const SET_IS_DELETING_LINE_SPOT = 'SET_IS_DELETING_LINE_SPOT';
 
+export function SetCurrentUserId(id) {
+  return { type: SET_CURRENT_USER_ID, payload: id }
+}
+
+export function SetCurrentUserToken(token) {
+  return { type: SET_CURRENT_USER_TOKEN, payload: token }
+}
+
 export function ChangeRoomName(name) {
   return { type: CHANGE_ROOM_NAME, payload: name }
-}
-
-export function SetUserId(id) {
-  return { type: SET_USER_ID, payload: id }
-}
-
-export function SetUserToken(token) {
-  return { type: SET_USER_TOKEN, payload: token }
 }
 
 export function SetReturnTo(location) {

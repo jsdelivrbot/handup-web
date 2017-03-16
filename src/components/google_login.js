@@ -6,7 +6,7 @@ import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
 import ReactGoogleLogin from 'react-google-login';
 import { googleClientId } from '../config';
-import { SetUserId, SetUserToken } from '../actions';
+import { SetCurrentUserId, SetCurrentUserToken } from '../actions';
 
 class GoogleLogin extends Component {
   constructor(props) {
@@ -52,11 +52,11 @@ class GoogleLogin extends Component {
   }
 
   handleLoginResponse(response, userData) {
-    this.props.SetUserId(response.data.loginUserWithAuth0Social.user.id);
+    this.props.SetCurrentUserId(response.data.loginUserWithAuth0Social.user.id);
 
     // Force instant local storage set
-    localStorage.setItem('reduxPersist:userToken', `"${response.data.loginUserWithAuth0Social.token}"`);
-    this.props.SetUserToken(response.data.loginUserWithAuth0Social.token)
+    localStorage.setItem('reduxPersist:currentUserToken', `"${response.data.loginUserWithAuth0Social.token}"`);
+    this.props.SetCurrentUserToken(response.data.loginUserWithAuth0Social.token)
 
     const updateInput = _.merge(userData, { id: response.data.loginUserWithAuth0Social.user.id });
     this.updateUser(updateInput);
@@ -109,4 +109,4 @@ function mapStateToProps({ returnTo }) {
   return { returnTo };
 };
 
-export default connect(mapStateToProps, { SetUserId, SetUserToken })(withRouter(GoogleLoginWithData));
+export default connect(mapStateToProps, { SetCurrentUserId, SetCurrentUserToken })(withRouter(GoogleLoginWithData));
