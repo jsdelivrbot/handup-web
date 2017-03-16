@@ -6,7 +6,7 @@ import { SetReturnTo } from '../actions';
 
 function LoginButton({ history, SetReturnTo }) {
   return (
-    <button onClick={onClick}>Enter</button>
+    <button onClick={onClick} className="btn btn-xl btn-primary full-width">Login to participate</button>
   );
 
   function onClick() {
