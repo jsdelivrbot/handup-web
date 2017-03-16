@@ -1,16 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { ChangeRoomName } from '../actions';
+import { SetRoomNameInput } from '../actions';
 
-function NewRoom({ roomName, history, ChangeRoomName }) {
+function NewRoom({ roomNameInput, history, SetRoomNameInput }) {
   return (
     <div>
       <h1>What room?</h1>
 
       <form onSubmit={onSubmit}>
         <div className="form-group">
-          <input type="text" className="form-control" value={roomName} onChange={onRoomNameChange} />
+          <input type="text" className="form-control" value={roomNameInput} onChange={onRoomNameChange} />
         </div>
         <button type="submit" className="btn btn-xl btn-primary">Enter</button>
       </form>
@@ -18,16 +18,16 @@ function NewRoom({ roomName, history, ChangeRoomName }) {
   )
 
   function onSubmit() {
-    history.push(`/room/${roomName}`);
+    history.push(`/room/${roomNameInput}`);
   }
 
   function onRoomNameChange(event) {
-    ChangeRoomName(event.target.value);
+    SetRoomNameInput(event.target.value);
   }
 }
 
-function mapStateToProps({ roomName }) {
-  return { roomName };
+function mapStateToProps({ roomNameInput }) {
+  return { roomNameInput };
 }
 
-export default connect(mapStateToProps, { ChangeRoomName })(withRouter(NewRoom));
+export default connect(mapStateToProps, { SetRoomNameInput })(withRouter(NewRoom));

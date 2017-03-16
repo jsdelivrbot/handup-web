@@ -1,6 +1,6 @@
 export const SET_CURRENT_USER_ID = 'SET_CURRENT_USER_ID';
 export const SET_CURRENT_USER_TOKEN = 'SET_CURRENT_USER_TOKEN';
-export const CHANGE_ROOM_NAME = 'CHANGE_ROOM_NAME';
+export const SET_ROOM_NAME_INPUT = 'SET_ROOM_NAME_INPUT';
 export const SET_RETURN_TO = 'SET_RETURN_TO';
 export const SET_IS_CREATING_LINE_SPOT = 'SET_IS_CREATING_LINE_SPOT';
 export const SET_IS_DELETING_LINE_SPOT = 'SET_IS_DELETING_LINE_SPOT';
@@ -13,8 +13,8 @@ export function SetCurrentUserToken(token) {
   return { type: SET_CURRENT_USER_TOKEN, payload: token }
 }
 
-export function ChangeRoomName(name) {
-  return { type: CHANGE_ROOM_NAME, payload: name }
+export function SetRoomNameInput(name) {
+  return { type: SET_ROOM_NAME_INPUT, payload: name }
 }
 
 export function SetReturnTo(location) {
