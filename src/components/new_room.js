@@ -1,12 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+
+import LogoutButton from './logout_button';
 import { SetRoomNameInput } from '../actions';
 
 function NewRoom({ roomNameInput, history, SetRoomNameInput }) {
   return (
     <div>
-      <h1>What room?</h1>
+      <div className="flex flex-row flex-align-items-center">
+        <div style={{ flex: '1 0' }}>
+          <h1>What room?</h1>
+        </div>
+        <div style={{ flex: '0 0' }}>
+          <LogoutButton />
+        </div>
+      </div>
 
       <form onSubmit={onSubmit}>
         <div className="form-group">
