@@ -1,3 +1,7 @@
+.center-text {
+  text-align: center;
+}
+
 .full-width {
   width: 100%;
 }
@@ -8,4 +12,32 @@
 
 .m-b-s {
   margin-bottom: 10px;
+}
+
+.m-b-m {
+  margin-bottom: 20px;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+.flex-align-items-center {
+  align-items: center;
+}
+
+.flex-full-width {
+  flex: 1 100%;
+}
+
+.circle {
+  border-radius: 50%;
 }

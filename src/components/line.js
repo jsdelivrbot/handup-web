@@ -70,20 +70,16 @@ class Line extends Component {
           <MainButton room={room} />
         </div>
 
-        <ul className="list-group">
+        <div className="flex flex-column">
           {this.renderLineSpots(room)}
-        </ul>
+        </div>
       </div>
     );
   }
 
   renderLineSpots(room) {
     return room.lineSpots.edges.map(function (lineSpot, index) {
-      return (
-        <li className="list-group-item" key={lineSpot.node.id}>
-          <LineSpot lineSpot={lineSpot.node} index={index} />
-        </li>
-      );
+      return <LineSpot key={lineSpot.node.id} lineSpot={lineSpot.node} index={index} />;
     });
   }
 };
