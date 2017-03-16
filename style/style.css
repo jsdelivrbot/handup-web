@@ -6,6 +6,10 @@
   width: 100%;
 }
 
+.p-s {
+  padding: 10px;
+}
+
 .m-t-s {
   margin-top: 10px;
 }
@@ -32,10 +36,6 @@
 
 .flex-align-items-center {
   align-items: center;
-}
-
-.flex-full-width {
-  flex: 1 100%;
 }
 
 .circle {
