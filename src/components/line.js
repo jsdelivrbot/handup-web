@@ -78,10 +78,10 @@ class Line extends Component {
   }
 
   renderLineSpots(room) {
-    return room.lineSpots.edges.map(function (lineSpot) {
+    return room.lineSpots.edges.map(function (lineSpot, index) {
       return (
         <li className="list-group-item" key={lineSpot.node.id}>
-          <LineSpot lineSpot={lineSpot.node} />
+          <LineSpot lineSpot={lineSpot.node} position={index + 1} />
         </li>
       );
     });
