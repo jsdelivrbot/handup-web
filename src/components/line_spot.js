@@ -2,7 +2,7 @@ import React from 'react';
 
 import TimeAgo from './time_ago';
 
-export default function LineSpot({ lineSpot, index }) {
+export default function LineSpot({ currentUser, lineSpot, index }) {
   return (
     <div className="flex flex-row flex-align-items-center m-t-s m-b-s">
       <div className="center-text" style={{ flex: '2 0 50px' }}>
@@ -30,9 +30,13 @@ export default function LineSpot({ lineSpot, index }) {
 
   function renderIndex() {
     if (index == 0) {
-      return <div style={{fontSize: '16px'}}>Current turn</div>;
+      if (currentUser && lineSpot.user.id == currentUser.id) {
+        return <div className="bold" style={{ fontSize: '26px' }}>Your turn!</div>;
+      } else {
+        return <div style={{ fontSize: '16px' }}>Current turn</div>;
+      }
     } else {
-      return <div style={{fontSize: '26px'}}>#{index}</div>;
+      return <div style={{ fontSize: '26px' }}>#{index}</div>;
     }
   }
 };

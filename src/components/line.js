@@ -63,7 +63,7 @@ class Line extends Component {
       return <div>Loading ...</div>;
     }
 
-    const user = this.props.getUserQuery.getUser;
+    const user = this.props.getUserQuery ? this.props.getUserQuery.getUser : null;
     const room = this.props.getRoomQuery.getRoom;
 
     return (
@@ -73,15 +73,15 @@ class Line extends Component {
         </div>
 
         <div className="flex flex-column">
-          {this.renderLineSpots(room)}
+          {this.renderLineSpots(room, user)}
         </div>
       </div>
     );
   }
 
-  renderLineSpots(room) {
+  renderLineSpots(room, currentUser) {
     return room.lineSpots.edges.map(function (lineSpot, index) {
-      return <LineSpot key={lineSpot.node.id} lineSpot={lineSpot.node} index={index} />;
+      return <LineSpot key={lineSpot.node.id} currentUser={currentUser} lineSpot={lineSpot.node} index={index} />;
     });
   }
 };
