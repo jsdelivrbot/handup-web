@@ -1,5 +1,6 @@
 import React from 'react';
-import moment from 'moment';
+
+import TimeAgo from './time_ago';
 
 export default function LineSpot({ lineSpot, index }) {
   return (
@@ -23,7 +24,7 @@ export default function LineSpot({ lineSpot, index }) {
     if (index == 0) {
       return '';
     } else {
-      return moment(lineSpot.createdAt).fromNow();
+      return <TimeAgo time={lineSpot.createdAt} />;
     }
   }
 
