@@ -1,15 +1,23 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 
-function RaiseHandButton({ userId, roomId, createLineSpotMutation }) {
+import { SetIsCreatingLineSpot } from '../actions';
+
+function RaiseHandButton({ userId, roomId, createLineSpotMutation, isCreatingLineSpot, SetIsCreatingLineSpot }) {
   return (
-    <button className="btn btn-xl btn-primary full-width" onClick={onClick}>Raise hand</button>
+    <button className="btn btn-xl btn-primary full-width" onClick={onClick} disabled={isCreatingLineSpot}>
+      Raise hand
+    </button>
   );
 
   function onClick() {
+    SetIsCreatingLineSpot(true);
     const input = { roomId, userId };
-    createLineSpotMutation({ variables: { input }});
+    createLineSpotMutation({ variables: { input }}).then(() => {
+      SetIsCreatingLineSpot(false);
+    });
   }
 };
 
@@ -23,4 +31,10 @@ const createLineSpotMutation = gql`
   }
 `;
 
-export default graphql(createLineSpotMutation, { name: 'createLineSpotMutation' })(RaiseHandButton);
+const RaiseHandButtonWithData = graphql(createLineSpotMutation, { name: 'createLineSpotMutation' })(RaiseHandButton);
+
+function mapStateToProps({ isCreatingLineSpot }) {
+  return { isCreatingLineSpot };
+}
+
+export default connect(mapStateToProps, { SetIsCreatingLineSpot })(RaiseHandButtonWithData)
