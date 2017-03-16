@@ -10,6 +10,14 @@
   color: black;
 }
 
+.faded {
+  opacity: 0.5;
+}
+
+.faded:hover {
+  opacity: 1;
+}
+
 .full-width {
   width: 100%;
 }

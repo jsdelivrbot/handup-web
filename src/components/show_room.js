@@ -24,7 +24,7 @@ class ShowRoom extends Component {
         <div className="flex flex-row flex-align-items-center m-b-xs">
           <div style={{ flex: '0 0 55px' }}>
             <Link to="/">
-              <button className="btn btn-default text-black">
+              <button className="btn btn-default text-black faded">
                 <i className="fa fa-arrow-left" />
               </button>
             </Link>

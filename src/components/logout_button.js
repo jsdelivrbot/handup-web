@@ -9,7 +9,7 @@ function LogoutButton({ currentUserId, SetCurrentUserId, SetCurrentUserToken }) 
   }
 
   return (
-    <button className="btn btn-default" onClick={onClick}>
+    <button className="btn btn-default faded" onClick={onClick}>
       <i className="fa fa-sign-out" />
     </button>
   );
