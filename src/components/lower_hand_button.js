@@ -1,10 +1,15 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 
-function LowerHandButton({ roomId, userId, userLineSpot, isUserTurn, deleteLineSpotMutation }) {
+import { SetIsDeletingLineSpot } from '../actions';
+
+function LowerHandButton({ roomId, userId, userLineSpot, isUserTurn, deleteLineSpotMutation, isDeletingLineSpot, SetIsDeletingLineSpot }) {
   return (
-    <button className="btn btn-xl btn-primary full-width" onClick={onClick}>{buttonText()}</button>
+    <button className="btn btn-xl btn-primary full-width" onClick={onClick} disabled={isDeletingLineSpot}>
+      {buttonText()}
+    </button>
   );
 
   function buttonText() {
@@ -12,8 +17,10 @@ function LowerHandButton({ roomId, userId, userLineSpot, isUserTurn, deleteLineS
   }
 
   function onClick() {
+    SetIsDeletingLineSpot(true);
     const input = { id: userLineSpot.id };
-    deleteLineSpotMutation({ variables: { input } });
+    deleteLineSpotMutation({ variables: { input } })
+      .then(() => SetIsDeletingLineSpot(false));
   }
 };
 
@@ -27,4 +34,10 @@ const deleteLineSpotMutation = gql`
   }
 `;
 
-export default graphql(deleteLineSpotMutation, { name: 'deleteLineSpotMutation' })(LowerHandButton);
+const LowerHandButtonWithData = graphql(deleteLineSpotMutation, { name: 'deleteLineSpotMutation' })(LowerHandButton);
+
+function mapStateToProps({ isDeletingLineSpot }) {
+  return { isDeletingLineSpot };
+}
+
+export default connect(mapStateToProps, { SetIsDeletingLineSpot })(LowerHandButtonWithData)
