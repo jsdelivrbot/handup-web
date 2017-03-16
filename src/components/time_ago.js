@@ -1,30 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 import moment from 'moment';
 
-export default class TimeAgo extends Component {
-  constructor(props) {
-    super(props);
+import TimedRender from './timed_render';
 
-    this.state = {
-      text: ''
-    };
-  }
+export default function TimeAgo({ time }) {
+  return <TimedRender contentProvider={timeFromNow} />;
 
-  componentWillMount() {
-    this.interval = setInterval(() => {
-      this.setState({ text: moment(this.props.time).fromNow() })
-    }, 1000);
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.interval);
-  }
-
-  render() {
-    return (
-      <span>
-        {this.state.text}
-      </span>
-    );
+  function timeFromNow() {
+    return moment(time).fromNow();
   }
 }
