@@ -6,6 +6,10 @@
   font-weight: bold;
 }
 
+.text-black {
+  color: black;
+}
+
 .full-width {
   width: 100%;
 }

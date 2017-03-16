@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 
 import Line from './line';
 import LogoutButton from './logout_button';
@@ -24,6 +24,11 @@ class ShowRoom extends Component {
         <div className="flex flex-row flex-align-items-center">
           <div style={{ flex: '1 0' }}>
             <h1>#{this.props.match.params.name}</h1>
+          </div>
+          <div style={{ flex: '0 0 100px' }}>
+            <Link to="/">
+              <button className="btn btn-default text-black">Bo back</button>
+            </Link>
           </div>
           <div style={{ flex: '0 0' }}>
             <LogoutButton />
