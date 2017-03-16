@@ -1,6 +1,7 @@
 import React from 'react';
 
 import TimeAgo from './time_ago';
+import TimeCounter from './time_counter';
 
 export default function LineSpot({ currentUser, lineSpot, index }) {
   return (
@@ -22,7 +23,9 @@ export default function LineSpot({ currentUser, lineSpot, index }) {
 
   function renderTime() {
     if (index == 0) {
-      return '';
+      if (lineSpot.turnStartedAt) {
+        return <TimeCounter startedAt={lineSpot.turnStartedAt} />;
+      }
     } else {
       return <TimeAgo time={lineSpot.createdAt} />;
     }
