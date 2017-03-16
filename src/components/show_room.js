@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { gql, graphql, compose } from 'react-apollo';
+import { graphql, compose } from 'react-apollo';
+import gql from 'graphql-tag';
 import { Link } from 'react-router';
 
 import Line from './line';

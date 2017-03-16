@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { gql, graphql, compose } from 'react-apollo';
+import { graphql, compose } from 'react-apollo';
+import gql from 'graphql-tag';
+import update from 'immutability-helper';
 
 import LineSpot from './line_spot';
 import MainButton from './main_button';
@@ -20,35 +22,34 @@ class Line extends Component {
               }
             },
             updateQuery: (prev, { subscriptionData }) => {
-              let newEdges;
-
               switch (subscriptionData.data.subscribeToLineSpot.mutation) {
               case 'createLineSpot':
-                const edgesWithCreatedItem = [
-                  { node: subscriptionData.data.subscribeToLineSpot.value },
-                  ...prev.getRoom.lineSpots.edges
-                ];
-
-                return {
+                return update(prev, {
                   getRoom: {
                     lineSpots: {
-                      edges: edgesWithCreatedItem
+                      edges: {
+                        $unshift: [
+                          { node: subscriptionData.data.subscribeToLineSpot.value }
+                        ]
+                      }
                     }
                   }
-                };
+                });
               case 'deleteLineSpot':
-                const edgesWithoutDeletedItem = _.reject(
+                const indexToRemove =  _.findIndex(
                   prev.getRoom.lineSpots.edges,
                   { node: { id: subscriptionData.data.subscribeToLineSpot.value.id } }
                 );
 
-                return {
+                return update(prev, {
                   getRoom: {
                     lineSpots: {
-                      edges: edgesWithoutDeletedItem,
+                      edges: {
+                        $splice: [[indexToRemove, 1]]
+                      }
                     }
                   }
-                };
+                });
               }
             }
           }
@@ -88,7 +89,7 @@ class Line extends Component {
 };
 
 const createLineSpotSubscription = gql`
-  subscription subscribeToCreateLineSpot($filter: LineSpotSubscriptionFilter) {
+  subscription subscribeToLineSpot($filter: LineSpotSubscriptionFilter) {
     subscribeToLineSpot(mutations: [createLineSpot, deleteLineSpot], filter: $filter) {
       mutation
       value {
@@ -104,7 +105,11 @@ const createLineSpotSubscription = gql`
   }
 `;
 
-const getRoomQueryOptions = ({ roomId }) => ({ variables: { id: roomId } });
+const getRoomQueryOptions = ({ roomId }) => ({
+  returnPartialData: true,
+  variables: { id: roomId }
+});
+
 const getRoomQuery = gql`
   query getRoom($id: ID!) {
     getRoom(id: $id) {

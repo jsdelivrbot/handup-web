@@ -1,10 +1,15 @@
 import React from 'react';
-import { gql, graphql } from 'react-apollo';
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
 
-function LowerHandButton({ roomId, userId, userLineSpot, deleteLineSpotMutation }) {
+function LowerHandButton({ roomId, userId, userLineSpot, isUserTurn, deleteLineSpotMutation }) {
   return (
-    <button className="btn btn-xl btn-primary full-width" onClick={onClick}>Lower hand</button>
+    <button className="btn btn-xl btn-primary full-width" onClick={onClick}>{buttonText()}</button>
   );
+
+  function buttonText() {
+    return isUserTurn ? "I'm done!" : 'Lower hand';
+  }
 
   function onClick() {
     const input = { id: userLineSpot.id };
