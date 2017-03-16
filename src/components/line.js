@@ -81,7 +81,7 @@ class Line extends Component {
     return room.lineSpots.edges.map(function (lineSpot, index) {
       return (
         <li className="list-group-item" key={lineSpot.node.id}>
-          <LineSpot lineSpot={lineSpot.node} position={index + 1} />
+          <LineSpot lineSpot={lineSpot.node} index={index} />
         </li>
       );
     });
