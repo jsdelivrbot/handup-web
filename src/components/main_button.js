@@ -35,7 +35,7 @@ function MainButton({ currentUserId, currentUser, room }) {
   }
 
   function renderLoading() {
-    return <button className="btn btn-xl btn-primary full-width">Loading ...</button>
+    return <button className="btn btn-xl btn-primary full-width">Loading ...</button>;
   }
 }
 
