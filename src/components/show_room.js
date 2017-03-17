@@ -32,7 +32,7 @@ class ShowRoom extends Component {
           <div style={{ flex: '1 0' }}>
             <h1 className="m-b-z">#{this.props.match.params.name}</h1>
           </div>
-          <div style={{ flex: '0 0' }}>
+          <div style={{ flex: '0 0 100px', textAlign: 'right' }}>
             <LogoutButton />
           </div>
         </div>
