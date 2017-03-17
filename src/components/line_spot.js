@@ -11,7 +11,7 @@ export default function LineSpot({ currentUser, lineSpot, index }) {
         {renderIndex()}
       </div>
       <div className="p-s" style={{ flex: '0 0 96px', padding: '10px' }}>
-        <img className="circle" src={lineSpot.user.avatarImageUrl} />
+        <img className="circle" src={lineSpot.user.avatarImageUrl} style={{ width: '70px' }} />
       </div>
       <div className="center-text" style={{ flex: '3 1 300px', fontSize: '26px' }}>
         {lineSpot.user.name}
