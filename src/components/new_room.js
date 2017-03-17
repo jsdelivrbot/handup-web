@@ -12,7 +12,7 @@ function NewRoom({ roomNameInput, history, SetRoomNameInput }) {
         <div style={{ flex: '1 0' }}>
           <h1>What room?</h1>
         </div>
-        <div style={{ flex: '0 0' }}>
+        <div style={{ flex: '0 0 100px' }}>
           <LogoutButton />
         </div>
       </div>
