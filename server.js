@@ -7,9 +7,9 @@ var isProduction = process.env.NODE_ENV === 'production';
 var port = isProduction ? process.env.PORT : 8080;
 var publicPath = __dirname;
 
-// We point to our static assets
-app.use(express.static(publicPath));
 app.use(history());
+app.use(express.static(publicPath));
+
 
 // And run the server
 app.listen(port, function () {
