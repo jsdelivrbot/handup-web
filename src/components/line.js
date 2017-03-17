@@ -69,7 +69,7 @@ class Line extends Component {
               }
             }
           }
-        )
+        );
     }
   }
 
