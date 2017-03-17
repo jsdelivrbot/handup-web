@@ -25,7 +25,7 @@ function MainButton({ currentUserId, currentUser, room }) {
           />
         );
       } else {
-        return <RaiseHandButton roomId={room.id} />;
+        return <RaiseHandButton room={room} />;
       }
     } else {
       return renderLoading();
