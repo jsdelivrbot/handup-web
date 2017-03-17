@@ -5,7 +5,7 @@ export default class TimedRender extends Component {
     super(props);
 
     this.state = {
-      content: ''
+      content: props.contentProvider()
     };
   }
 
