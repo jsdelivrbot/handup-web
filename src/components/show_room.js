@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
@@ -43,13 +44,9 @@ class ShowRoom extends Component {
   }
 
   renderLine() {
-    if (this.props.roomQuery.loading || this.props.roomQuery.viewer.allRooms.edges.length == 0) {
-      return <div>Loading ...</div>;
-    }
+    const roomId = _.get(this.props.roomQuery, 'viewer.allRooms.edges[0].node.id');
 
-    const room = this.props.roomQuery.viewer.allRooms.edges[0].node;
-
-    return <Line roomId={room.id} />;
+    return <Line roomId={roomId} />;
   }
 }
 

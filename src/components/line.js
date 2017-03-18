@@ -77,7 +77,7 @@ class Line extends Component {
 
   render() {
     const currentUser = (this.props.getUserQuery && this.props.getUserQuery.getUser) ? this.props.getUserQuery.getUser : null;
-    const room = this.props.getRoomQuery.getRoom;
+    const room = (this.props.getRoomQuery && this.props.getRoomQuery.getRoom) ? this.props.getRoomQuery.getRoom : null;
 
     return (
       <div>
@@ -161,7 +161,7 @@ const getRoomQuery = gql`
 
 const LineWithData = compose(
   graphql(getUserQuery, { name: 'getUserQuery', options: getUserQueryOptions, skip: ({ currentUserId }) => !currentUserId }),
-  graphql(getRoomQuery, { name: 'getRoomQuery', options: getRoomQueryOptions })
+  graphql(getRoomQuery, { name: 'getRoomQuery', options: getRoomQueryOptions, skip: ({ roomId }) => !roomId })
 )(Line);
 
 function mapStateToProps({ currentUserId }) {
