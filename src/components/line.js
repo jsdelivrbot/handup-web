@@ -9,67 +9,69 @@ import MainButton from './main_button';
 
 class Line extends Component {
   componentWillReceiveProps(nextProps) {
-    if (this.props.getRoomQuery.loading && !nextProps.getRoomQuery.loading) {
-      nextProps
-        .getRoomQuery
-        .subscribeToMore(
-          {
-            document: createLineSpotSubscription,
-            variables: {
-              filter: {
-                roomId: {
-                  eq: this.props.roomId
+    if (!nextProps.getRoomQuery.loading && nextProps.getRoomQuery.getRoom) {
+      if (!this.subscription || !this.props.getRoomQuery.getRoom || this.props.getRoomQuery.getRoom.id != nextProps.getRoomQuery.getRoom.id) {
+        this.subscription = nextProps
+          .getRoomQuery
+          .subscribeToMore(
+            {
+              document: createLineSpotSubscription,
+              variables: {
+                filter: {
+                  roomId: {
+                    eq: this.props.roomId
+                  }
+                }
+              },
+              updateQuery: (prev, { subscriptionData }) => {
+                switch (subscriptionData.data.subscribeToLineSpot.mutation) {
+                case 'createLineSpot':
+                  return update(prev, {
+                    getRoom: {
+                      lineSpots: {
+                        edges: {
+                          $push: [
+                            { node: subscriptionData.data.subscribeToLineSpot.value }
+                          ]
+                        }
+                      }
+                    }
+                  });
+                case 'updateLineSpot':
+                  const indexToReplace =  _.findIndex(
+                    prev.getRoom.lineSpots.edges,
+                    { node: { id: subscriptionData.data.subscribeToLineSpot.value.id } }
+                  );
+
+                  return update(prev, {
+                    getRoom: {
+                      lineSpots: {
+                        edges: {
+                          $splice: [[indexToRemove, 1, { node: subscriptionData.data.subscribeToLineSpot.value }]]
+                        }
+                      }
+                    }
+                  });
+                case 'deleteLineSpot':
+                  const indexToRemove =  _.findIndex(
+                    prev.getRoom.lineSpots.edges,
+                    { node: { id: subscriptionData.data.subscribeToLineSpot.value.id } }
+                  );
+
+                  return update(prev, {
+                    getRoom: {
+                      lineSpots: {
+                        edges: {
+                          $splice: [[indexToRemove, 1]]
+                        }
+                      }
+                    }
+                  });
                 }
               }
-            },
-            updateQuery: (prev, { subscriptionData }) => {
-              switch (subscriptionData.data.subscribeToLineSpot.mutation) {
-              case 'createLineSpot':
-                return update(prev, {
-                  getRoom: {
-                    lineSpots: {
-                      edges: {
-                        $push: [
-                          { node: subscriptionData.data.subscribeToLineSpot.value }
-                        ]
-                      }
-                    }
-                  }
-                });
-              case 'updateLineSpot':
-                const indexToReplace =  _.findIndex(
-                  prev.getRoom.lineSpots.edges,
-                  { node: { id: subscriptionData.data.subscribeToLineSpot.value.id } }
-                );
-
-                return update(prev, {
-                  getRoom: {
-                    lineSpots: {
-                      edges: {
-                        $splice: [[indexToRemove, 1, { node: subscriptionData.data.subscribeToLineSpot.value }]]
-                      }
-                    }
-                  }
-                });
-              case 'deleteLineSpot':
-                const indexToRemove =  _.findIndex(
-                  prev.getRoom.lineSpots.edges,
-                  { node: { id: subscriptionData.data.subscribeToLineSpot.value.id } }
-                );
-
-                return update(prev, {
-                  getRoom: {
-                    lineSpots: {
-                      edges: {
-                        $splice: [[indexToRemove, 1]]
-                      }
-                    }
-                  }
-                });
-              }
             }
-          }
-        );
+          );
+      }
     }
   }
 
