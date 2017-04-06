@@ -3,10 +3,9 @@ export default {
     if (!req.options.headers) {
       req.options.headers = {};  // Create the header object if needed.
     }
-    const localTokenValue = localStorage.getItem('reduxPersist:currentUserToken');
-    if (localTokenValue) {
-      const token = localTokenValue.slice(1, localTokenValue.length - 1);
-      req.options.headers.Authorization = `Bearer ${token}`;
+    const localToken = JSON.parse(localStorage.getItem('reduxPersist:currentUserToken'));
+    if (localToken && localToken.value) {
+      req.options.headers.Authorization = `Bearer ${localToken.value}`;
     }
     next();
   }

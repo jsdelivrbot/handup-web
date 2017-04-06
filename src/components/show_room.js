@@ -9,7 +9,7 @@ import LogoutButton from './logout_button';
 
 class ShowRoom extends Component {
   componentWillReceiveProps(nextProps) {
-    if (!nextProps.roomQuery.loading && nextProps.roomQuery.viewer.allRooms.edges.length == 0) {
+    if (!nextProps.roomQuery.loading && nextProps.roomQuery.viewer && nextProps.roomQuery.viewer.allRooms.edges.length == 0) {
       const input = { name: this.props.match.params.name };
 
       this

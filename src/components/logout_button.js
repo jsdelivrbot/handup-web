@@ -49,7 +49,7 @@ const LogoutButtonWithData = compose(
 )(LogoutButton);
 
 function mapStateToProps({ currentUserId }) {
-  return { currentUserId };
+  return { currentUserId: currentUserId.value };
 }
 
 export default connect(mapStateToProps, { SetCurrentUserId, SetCurrentUserToken })(LogoutButtonWithData);

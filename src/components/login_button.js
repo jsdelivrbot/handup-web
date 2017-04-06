@@ -51,17 +51,17 @@ class LoginButton extends Component {
   }
 
   handleLoginResponse(response, userData) {
-    this.props.SetCurrentUserId(response.data.loginUserWithAuth0Social.user.id);
-    // Force instant local storage set
-    localStorage.setItem('reduxPersist:currentUserToken', `"${response.data.loginUserWithAuth0Social.token}"`);
-    this.props.SetCurrentUserToken(response.data.loginUserWithAuth0Social.token)
+    this.props.SetCurrentUserToken(response.data.loginUserWithAuth0Social.token);
 
-    const input = _.merge(userData, { id: response.data.loginUserWithAuth0Social.user.id });
-    this
-      .props
-      .updateUserMutation({
-        variables: { input }
-      });
+    setTimeout(() => {
+      this.props.SetCurrentUserId(response.data.loginUserWithAuth0Social.user.id);
+      const input = _.merge(userData, { id: response.data.loginUserWithAuth0Social.user.id });
+      this
+        .props
+        .updateUserMutation({
+          variables: { input }
+        });
+    }, 0);
   }
 
   onFailure(response) {

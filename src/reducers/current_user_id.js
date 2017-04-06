@@ -1,9 +1,9 @@
 import { SET_CURRENT_USER_ID } from '../actions';
 
-export default function CurrentUserId(state = null, action) {
+export default function CurrentUserId(state = {}, action) {
   switch (action.type) {
     case SET_CURRENT_USER_ID:
-      return action.payload;
+      return { value: action.payload };
     default:
       return state;
   }

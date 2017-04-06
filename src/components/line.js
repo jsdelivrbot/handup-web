@@ -9,7 +9,7 @@ import MainButton from './main_button';
 
 class Line extends Component {
   componentWillReceiveProps(nextProps) {
-    if (!nextProps.getRoomQuery.loading && nextProps.getRoomQuery.getRoom) {
+    if (nextProps.getRoomQuery && !nextProps.getRoomQuery.loading && nextProps.getRoomQuery.getRoom) {
       if (!this.subscription || !this.props.getRoomQuery.getRoom || this.props.getRoomQuery.getRoom.id != nextProps.getRoomQuery.getRoom.id) {
         this.subscription = nextProps
           .getRoomQuery
@@ -165,7 +165,7 @@ const LineWithData = compose(
 )(Line);
 
 function mapStateToProps({ currentUserId }) {
-  return { currentUserId };
+  return { currentUserId: currentUserId.value };
 }
 
 export default connect(mapStateToProps)(LineWithData);

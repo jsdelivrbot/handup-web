@@ -45,7 +45,7 @@ const RaiseHandButtonWithData = compose(
 )(RaiseHandButton);
 
 function mapStateToProps({ currentUserId, isCreatingLineSpot }) {
-  return { currentUserId, isCreatingLineSpot };
+  return { currentUserId: currentUserId.value, isCreatingLineSpot };
 }
 
 export default connect(mapStateToProps, { SetIsCreatingLineSpot })(RaiseHandButtonWithData)
