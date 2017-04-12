@@ -44,8 +44,8 @@ const RaiseHandButtonWithData = compose(
   graphql(createLineSpotMutation, { name: 'createLineSpotMutation' })
 )(RaiseHandButton);
 
-function mapStateToProps({ currentUserId, isCreatingLineSpot }) {
-  return { currentUserId: currentUserId.value, isCreatingLineSpot };
+function mapStateToProps({ currentUser, isCreatingLineSpot }) {
+  return { currentUserId: currentUser.id, isCreatingLineSpot };
 }
 
 export default connect(mapStateToProps, { SetIsCreatingLineSpot })(RaiseHandButtonWithData)

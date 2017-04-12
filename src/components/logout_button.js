@@ -48,8 +48,8 @@ const LogoutButtonWithData = compose(
   graphql(getUserQuery, { name: 'getUserQuery', options: getUserQueryOptions, skip: ({ currentUserId }) => !currentUserId })
 )(LogoutButton);
 
-function mapStateToProps({ currentUserId }) {
-  return { currentUserId: currentUserId.value };
+function mapStateToProps({ currentUser }) {
+  return { currentUserId: currentUser.id };
 }
 
 export default connect(mapStateToProps, { SetCurrentUserId, SetCurrentUserToken })(LogoutButtonWithData);

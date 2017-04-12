@@ -39,8 +39,8 @@ function MainButton({ currentUserId, currentUser, room }) {
   }
 }
 
-function mapStateToProps({ currentUserId }) {
-  return { currentUserId: currentUserId.value };
+function mapStateToProps({ currentUser }) {
+  return { currentUserId: currentUser.id };
 }
 
 export default connect(mapStateToProps)(MainButton);

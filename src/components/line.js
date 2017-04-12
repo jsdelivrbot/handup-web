@@ -164,8 +164,8 @@ const LineWithData = compose(
   graphql(getRoomQuery, { name: 'getRoomQuery', options: getRoomQueryOptions, skip: ({ roomId }) => !roomId })
 )(Line);
 
-function mapStateToProps({ currentUserId }) {
-  return { currentUserId: currentUserId.value };
+function mapStateToProps({ currentUser }) {
+  return { currentUserId: currentUser.id };
 }
 
 export default connect(mapStateToProps)(LineWithData);
